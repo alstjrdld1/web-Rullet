@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Join !</title>
+  </head>
+  <style>
+    .messages{
+      color : #963b3b;
+      margin-bottom : 16px;
+    }
+  </style>
+  <body>
+    <h1>join my website</h1>
+    <section class = "messages">
+      <%= message %>
+    </section>
+    <form class="" action="/join" method="post">
+      email : <input type="text" name="email" value="">
+      <br>
+      password : <input type="password" name="password" value="">
+      <br>
+      <input type="submit" name="" value="회원가입">
+    </form>
+  </body>
+</html>
