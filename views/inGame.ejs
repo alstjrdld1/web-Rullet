@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rullet Game</title>
+    <link rel="stylesheet" href="style/style.css">
+  </head>
+  <body>
+    <div class="game-page">
+      <div class="game-form">
+        <h1>Rullet Game</h1>
+        <div class="members">
+            <table>
+              <tr>
+                <td class = "circle"><%= userId %></td>
+                <td class = "circle">2</td>
+                <td class = "circle">3</td>
+              </tr>
+              <tr>
+                <td class = "circle">4</td>
+                <td class = "circle">5</td>
+                <td class = "circle">6</td>
+              </tr>
+            </table>
+        </div>
+        <form class="ready-form">
+          <input onclick="colorChange()" type="button" id="loginButton" value = "PRESS READY!"></input>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="buttonColor.js"></script>
+  </body>
+</html>
