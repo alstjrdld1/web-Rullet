@@ -4,6 +4,7 @@ var bodyParser = require('body-parser'); // bodyparser 불러오는거 이제 ex
 var mysql = require('mysql');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
+var requestIp = require('request-ip');
 
 /* 이런거 깃헙 사이트에서 예습이나 공부 많이 필요 */
 var passport = require('passport'); // passport 쓰는거
@@ -17,10 +18,8 @@ app.listen(3000, function(){
   console.log('rulletGame start on 3000');
 })
 
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
-
 
 app.use(bodyParser.urlencoded({extended:true})); // client랑 서버랑 데이터 주고 받을 때 인코딩 하는데 아스키 형태의 데이터만 주고 받을 수 있는데
 

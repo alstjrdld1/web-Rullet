@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <title>Rullet Game</title>
     <link rel="stylesheet" href="style/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+    // setTimeout(function(){
+    //   location.reload();
+    // },3000);
+    </script>
   </head>
   <body>
     <div class="game-page">
@@ -12,22 +20,74 @@
         <div class="members">
             <table>
               <tr>
-                <td class = "circle"><%= userId %></td>
-                <td class = "circle">2</td>
-                <td class = "circle">3</td>
+                <td id="circle1" class = "roomOwner"><%= userId %></td>
+                <td id="circle2" class = "">2</td>
+                <td id="circle3" class = "">3</td>
               </tr>
               <tr>
-                <td class = "circle">4</td>
-                <td class = "circle">5</td>
-                <td class = "circle">6</td>
+                <td id="circle4" class = "">4</td>
+                <td id="circle5" class = "">5</td>
+                <td id="circle6" class = "">6</td>
               </tr>
             </table>
         </div>
         <form class="ready-form">
           <input onclick="colorChange()" type="button" id="loginButton" value = "PRESS READY!"></input>
         </form>
+        <button type="button" id="updateBtn">UPDATE</button>
       </div>
     </div>
-    <script type="text/javascript" src="buttonColor.js"></script>
+
+    <script type="text/javascript">
+    function colorChange(){
+      var buttonValue = document.getElementById("loginButton");
+
+      if(buttonValue.value == "PRESS READY!"){
+        document.getElementById("loginButton").value = "Ready!";
+        document.getElementById("loginButton").style.background = '#4CAF50';
+      }
+      else if(buttonValue.value == "Ready!"){
+        document.getElementById("loginButton").value = "PRESS READY!";
+        document.getElementById("loginButton").style.background = '#76b852';
+
+      }
+    }
+
+    $("#updateBtn").click(function(){
+      $.ajax({
+        url: "/login/ajax/get",
+        method : "get",
+        data : "json",
+        error : function() {
+          console.log('ajax fail');
+        },
+        success : function(data){
+
+          let obj = JSON.parse(data);
+          console.log(obj[0]['uid']);
+          for (var i = 0; i < obj.length; i++) {
+            let index = i + 1;
+            let circleId = "#circle" + index;
+            console.log(circleId);
+
+            if($(circleId).attr('class') !== "roomOwner"){
+              if(obj[i]['ready']){
+                $(circleId).attr("class", "getReady");
+              }
+              else{
+                $(circleId).attr("class", "");
+              }
+            }
+            $(circleId).html(obj[i]['uid']);
+            if(obj[i]['uid'] == <%- JSON.stringify(userId) %>){
+              $(circleId).css("color", "yellow");
+            }
+          }
+          console.log(data);
+        }
+      })
+    })
+    document.getElementById("updateBtn").click();
+    </script>
   </body>
 </html>
